@@ -10,6 +10,7 @@
             [myapp.routes.auth                  :as auth]
             [myapp.routes.users                 :as users]
             [myapp.middleware.auth              :as auth-mw]
+            [malli.error                        :as me]
             [taoensso.timbre                    :as log]))
 
 (defn- wrap-exception
@@ -24,6 +25,31 @@
                  (log/error e "Unhandled exception")
                  {:status 500
                   :body   {:error "Internal server error"}}))))})
+
+(defn- wrap-coercion-errors
+  "Formats reitit coercion errors into a clean API response.
+   Request errors → 400 {:error ... :details {field [messages]}}.
+   Response errors → 500 (logged, details hidden from client)."
+  []
+  {:name ::coercion-errors
+   :wrap (fn [handler]
+           (fn [request]
+             (try
+               (handler request)
+               (catch clojure.lang.ExceptionInfo e
+                 (let [{:keys [type errors]} (ex-data e)]
+                   (case type
+                     :reitit.coercion/request-coercion
+                     {:status 400
+                      :body   {:error   "Validation failed"
+                               :details (me/humanize {:errors errors})}}
+
+                     :reitit.coercion/response-coercion
+                     (do (log/error e "Response coercion error")
+                         {:status 500
+                          :body   {:error "Internal server error"}})
+
+                     (throw e)))))))})
 
 (defn app
   "Build the Ring application. Called by Integrant on system start."
@@ -51,7 +77,7 @@
             :middleware [parameters/parameters-middleware
                          muuntaja/format-middleware
                          (wrap-exception)
-                         rrc/coerce-exceptions-middleware
+                         (wrap-coercion-errors)
                          rrc/coerce-request-middleware
                          rrc/coerce-response-middleware]}})
 
