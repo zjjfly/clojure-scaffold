@@ -32,25 +32,29 @@
    (ring/router
     [["/swagger.json"
       {:get {:no-doc  true
-             :swagger {:info {:title   "myapp API"
-                              :version "1.0.0"}}
+             :swagger {:info       {:title   "myapp API"
+                                    :version "1.0.0"}
+                       :components {:securitySchemes
+                                    {:bearerAuth {:type         "http"
+                                                  :scheme       "bearer"
+                                                  :bearerFormat "JWT"}}}}
              :handler (swagger/create-swagger-handler)}}]
 
      ["/api/v1"
+      {:middleware [muuntaja/format-middleware
+                    (wrap-exception)
+                    rrc/coerce-exceptions-middleware
+                    rrc/coerce-request-middleware
+                    rrc/coerce-response-middleware]}
       (auth/routes datasource secret)
 
       ["/users"
        {:middleware [(auth-mw/jwt-auth secret)]}
        (users/routes datasource)]]]
 
-    {:data {:coercion   reitit.coercion.malli/coercion
-            :muuntaja   m/instance
-            :middleware [parameters/parameters-middleware
-                         muuntaja/format-middleware
-                         (wrap-exception)
-                         rrc/coerce-exceptions-middleware
-                         rrc/coerce-request-middleware
-                         rrc/coerce-response-middleware]}})
+    {:data {:coercion reitit.coercion.malli/coercion
+            :muuntaja m/instance
+            :middleware [parameters/parameters-middleware]}})
 
    (ring/routes
     (swagger-ui/create-swagger-ui-handler {:path "/swagger-ui"

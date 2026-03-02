@@ -4,7 +4,8 @@
 
 (defn routes [datasource]
   [""
-   {:swagger {:tags ["users"]}}
+   {:swagger {:tags     ["users"]
+             :security [{:bearerAuth []}]}}
 
    [""
     {:get {:summary    "List all users"
