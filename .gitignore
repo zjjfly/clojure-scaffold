@@ -1,0 +1,8 @@
+/target
+/.cpcache
+/.clj-kondo/.cache
+/.lsp
+*.jar
+*.class
+.DS_Store
+.env
