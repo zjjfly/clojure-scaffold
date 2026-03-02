@@ -41,20 +41,20 @@
              :handler (swagger/create-swagger-handler)}}]
 
      ["/api/v1"
-      {:middleware [muuntaja/format-middleware
-                    (wrap-exception)
-                    rrc/coerce-exceptions-middleware
-                    rrc/coerce-request-middleware
-                    rrc/coerce-response-middleware]}
       (auth/routes datasource secret)
 
       ["/users"
        {:middleware [(auth-mw/jwt-auth secret)]}
        (users/routes datasource)]]]
 
-    {:data {:coercion reitit.coercion.malli/coercion
-            :muuntaja m/instance
-            :middleware [parameters/parameters-middleware]}})
+    {:data {:coercion   reitit.coercion.malli/coercion
+            :muuntaja   m/instance
+            :middleware [parameters/parameters-middleware
+                         muuntaja/format-middleware
+                         (wrap-exception)
+                         rrc/coerce-exceptions-middleware
+                         rrc/coerce-request-middleware
+                         rrc/coerce-response-middleware]}})
 
    (ring/routes
     (swagger-ui/create-swagger-ui-handler {:path "/swagger-ui"
