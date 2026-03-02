@@ -32,12 +32,11 @@
    (ring/router
     [["/swagger.json"
       {:get {:no-doc  true
-             :swagger {:info       {:title   "myapp API"
-                                    :version "1.0.0"}
-                       :components {:securitySchemes
-                                    {:bearerAuth {:type         "http"
-                                                  :scheme       "bearer"
-                                                  :bearerFormat "JWT"}}}}
+             :swagger {:info                {:title   "myapp API"
+                                            :version "1.0.0"}
+                       :securityDefinitions {:bearerAuth {:type "apiKey"
+                                                          :name "Authorization"
+                                                          :in   "header"}}}
              :handler (swagger/create-swagger-handler)}}]
 
      ["/api/v1"
