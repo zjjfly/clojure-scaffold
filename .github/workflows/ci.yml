@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test & Build
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB:       myapp_test
+          POSTGRES_USER:     myapp
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Clojure CLI
+        uses: DeLaGuardo/setup-clojure@12
+        with:
+          cli: latest
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key:  ${{ runner.os }}-maven-${{ hashFiles('deps.edn') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Download dependencies
+        run: clojure -P && clojure -P -M:test
+
+      - name: Run tests
+        env:
+          DATABASE_URL: jdbc:postgresql://localhost:5432/myapp_test
+          DB_USER:      myapp
+          DB_PASSWORD:  password
+          JWT_SECRET:   ci-test-secret
+        run: clojure -M:test -m kaocha.runner
+
+      - name: Build uberjar
+        run: clojure -T:build uber
+
+      - name: Upload uberjar
+        uses: actions/upload-artifact@v4
+        with:
+          name: myapp-jar
+          path: target/myapp-0.1.0-standalone.jar
