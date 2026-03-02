@@ -14,7 +14,7 @@
                                  (second (str/split auth-header #"\s+" 2)))]
                (if token
                  (try
-                   (let [claims (jwt/unsign token secret)]
+                   (let [claims (jwt/unsign token secret {:alg :hs256})]
                      (handler (assoc request :identity claims)))
                    (catch Exception _
                      {:status 401
