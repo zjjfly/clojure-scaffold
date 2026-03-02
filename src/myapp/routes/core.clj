@@ -1,6 +1,6 @@
 (ns myapp.routes.core
   (:require [reitit.ring                        :as ring]
-            [reitit.coercion.malli              :as malli-coercion]
+            [reitit.coercion.malli]
             [reitit.ring.coercion               :as rrc]
             [reitit.ring.middleware.muuntaja    :as muuntaja]
             [reitit.ring.middleware.parameters  :as parameters]
