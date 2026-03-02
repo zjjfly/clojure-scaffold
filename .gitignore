@@ -6,3 +6,7 @@
 *.class
 .DS_Store
 .env
+.nrepl-port
+*.log
+/.idea/
+/.vscode/
