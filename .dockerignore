@@ -1,0 +1,9 @@
+target/
+.cpcache/
+.git/
+.github/
+dev/
+test/
+*.md
+.gitignore
+.dockerignore
