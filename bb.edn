@@ -1,0 +1,16 @@
+{:tasks
+ {test
+  {:doc  "Run all tests"
+   :task (apply clojure "-M:test -m kaocha.runner" *command-line-args*)}
+
+  test:unit
+  {:doc  "Run only the :unit test suite"
+   :task (clojure "-M:test -m kaocha.runner :unit")}
+
+  test:watch
+  {:doc  "Run tests in watch mode (re-run on file changes)"
+   :task (clojure "-M:test -m kaocha.runner --watch")}
+
+  test:fast
+  {:doc  "Run tests, stop on first failure"
+   :task (clojure "-M:test -m kaocha.runner --fail-fast")}}}

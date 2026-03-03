@@ -11,6 +11,5 @@
       (.addShutdownHook
        (Runtime/getRuntime)
        (Thread. (fn []
-                  (log/info "Shutdown signal received — halting system.")
-                  (ig/halt! sys))))
+                  (log/info "Shutdown signal received — halting system.") (ig/halt! sys))))
       (log/info "System started. Ready to serve."))))
