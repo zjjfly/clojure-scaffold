@@ -66,6 +66,7 @@ clojure-scaffold/
 - Java 11+
 - Clojure CLI tools
 - PostgreSQL
+- [Babashka](https://babashka.org/) (optional, for task automation)
 
 ### Install Dependencies
 
@@ -196,6 +197,36 @@ clojure -M:test --focus myapp.handlers.auth-test
 
 # Watch mode
 clojure -M:test --watch
+```
+
+## Babashka Tasks (Optional)
+
+If you have [Babashka](https://babashka.org/) installed, you can use the `bb` command to quickly execute common tasks:
+
+### Test Tasks
+```bash
+bb test              # Run all tests
+bb test:unit         # Run only the :unit test suite
+bb test:watch        # Watch mode - re-run tests on file changes
+bb test:fast         # Run tests, stop on first failure
+```
+
+### Build Tasks
+```bash
+bb clean             # Delete the build target directory
+bb prep              # Write pom.xml and copy resources
+bb compile:java      # Compile Java sources
+bb compile:clj       # Compile Clojure sources
+bb compile           # Compile all sources (Java + Clojure)
+bb jar               # Build jar
+bb uber              # Build uberjar
+bb native-image      # Build native image (requires GraalVM native-image)
+bb install           # Install jar into local Maven repository
+```
+
+### List All Available Tasks
+```bash
+bb tasks             # List all available tasks with descriptions
 ```
 
 ## Deployment

@@ -66,6 +66,7 @@ clojure-scaffold/
 - Java 11+
 - Clojure CLI tools
 - PostgreSQL
+- [Babashka](https://babashka.org/)（可选，用于任务自动化）
 
 ### 安装依赖
 
@@ -196,6 +197,36 @@ clojure -M:test --focus myapp.handlers.auth-test
 
 # 监听模式
 clojure -M:test --watch
+```
+
+## Babashka 任务（可选）
+
+如果安装了 [Babashka](https://babashka.org/)，可以使用 `bb` 命令快速执行常用任务：
+
+### 测试任务
+```bash
+bb test              # 运行所有测试
+bb test:unit         # 只运行 :unit 测试套件
+bb test:watch        # 监听模式，文件变化时自动重新运行测试
+bb test:fast         # 运行测试，遇到第一个失败就停止
+```
+
+### 构建任务
+```bash
+bb clean             # 删除构建目标目录
+bb prep              # 生成 pom.xml 并复制资源文件
+bb compile:java      # 编译 Java 源代码
+bb compile:clj       # 编译 Clojure 源代码
+bb compile           # 编译所有源代码（Java + Clojure）
+bb jar               # 构建 jar 包
+bb uber              # 构建 uberjar
+bb native-image      # 构建原生镜像（需要 GraalVM native-image）
+bb install           # 安装 jar 到本地 Maven 仓库
+```
+
+### 查看所有可用任务
+```bash
+bb tasks             # 列出所有可用的任务及其说明
 ```
 
 ## 部署
