@@ -13,4 +13,40 @@
 
   test:fast
   {:doc  "Run tests, stop on first failure"
-   :task (clojure "-M:test -m kaocha.runner --fail-fast")}}}
+   :task (clojure "-M:test -m kaocha.runner --fail-fast")}
+
+  clean
+  {:doc  "Delete the build target directory"
+   :task (clojure "-X:build clean")}
+
+  prep
+  {:doc  "Write pom.xml and copy resources"
+   :task (clojure "-X:build prep")}
+
+  compile:java
+  {:doc  "Compile Java sources"
+   :task (clojure "-X:build compile-java")}
+
+  compile:clj
+  {:doc  "Compile Clojure sources"
+   :task (clojure "-X:build compile-clj")}
+
+  compile
+  {:doc  "Compile all sources (Java + Clojure)"
+   :task (clojure "-X:build compile-all")}
+
+  jar
+  {:doc  "Build jar"
+   :task (clojure "-X:build jar")}
+
+  uber
+  {:doc  "Build uberjar"
+   :task (apply clojure "-X:build uber" *command-line-args*)}
+
+  native-image
+  {:doc  "Build native image (requires GraalVM native-image)"
+   :task (clojure "-X:build native-image")}
+
+  install
+  {:doc  "Install jar into local Maven repository"
+   :task (clojure "-X:build install-local")}}}
