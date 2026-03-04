@@ -10,6 +10,6 @@
 *.log
 /.idea/
 /.vscode/
-.claude
-.portal
-.calva
+/.claude/
+/.portal/
+/.calva/

@@ -18,7 +18,7 @@
 (def root-package (replace-hyphen artifact-id))
 ;; For dynamic versioning from git, use:
 ;;   (def version (format "1.2.%s" (b/git-count-revs nil)))
-(def version "1.0")
+(def version "0.1.0")
 (def clj-source (str "src/clj/" root-package))
 (def java-source (str "src/java/" (java-source-path group-id root-package)))
 (def resources "src/resources")
