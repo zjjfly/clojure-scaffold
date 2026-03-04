@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup Clojure CLI
-        uses: DeLaGuardo/setup-clojure@12
+        uses: DeLaGuardo/setup-clojure@13
         with:
           cli: latest
 
@@ -54,7 +54,7 @@ jobs:
         run: clojure -M:test -m kaocha.runner
 
       - name: Build uberjar
-        run: clojure -T:build uber
+        run: clojure -X:build uber
 
       - name: Upload uberjar
         uses: actions/upload-artifact@v4
