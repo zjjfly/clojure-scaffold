@@ -25,7 +25,6 @@
         ;; Logging
         com.taoensso/timbre              {:mvn/version "6.8.0"}
         org.slf4j/slf4j-simple           {:mvn/version "2.0.17"}
-        com.github.clj-easy/graal-build-time {:mvn/version "1.0.5"}
         }
 
  :aliases
@@ -40,6 +39,6 @@
           :extra-deps  {io.github.clojure/tools.build {:git/tag "v0.10.12"
                                                        :git/sha "97c556"}
                         org.babashka/cli              {:mvn/version "0.8.67"}
-                        babashka/process              {:mvn/version "0.6.25"}}
+                        }
           :main-opts   ["-m" "core"]
           :ns-default  core}}}

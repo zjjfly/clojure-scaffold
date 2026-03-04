@@ -1,6 +1,5 @@
 (ns core
   (:require [babashka.cli :as cli]
-            [babashka.process :as process]
             [clojure.java.io :as io]
             [clojure.string :as str]
             [clojure.tools.build.api :as b])
@@ -125,19 +124,6 @@
              :basis     (:basis opts)
              :main      (or (:main opts) main-class)})))
 
-(defn native-image
-  "build native image"
-  [opts]
-  (let [opts (assoc opts :basis (gen-basis opts))]
-    (when-not (.exists (io/file uber-file))
-      (uber opts))
-    (io/make-parents (io/file native-image-file))
-    (process/shell "native-image" "-jar" uber-file "-o" native-image-file
-                   "-H:+ReportExceptionStackTraces"
-                   "--features=clj_easy.graal_build_time.InitClojureClasses"
-                   "--report-unsupported-elements-at-runtime"
-                   "--verbose" "--no-fallback")))
-
 (defn install-local
   "install jar into local repository"
   [opts]
@@ -165,7 +151,6 @@
    "compile-all"   compile-all
    "jar"           jar
    "uber"          uber
-   "native-image"  native-image
    "install-local" install-local})
 
 (defn print-help []
