@@ -114,7 +114,7 @@ clojure -M:test -m kaocha.runner
 ### 构建 Uberjar
 
 ```bash
-clojure -T:build uber
+clojure -X:build uber
 ```
 
 ### 运行生产版本

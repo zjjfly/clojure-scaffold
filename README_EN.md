@@ -114,7 +114,7 @@ clojure -M:test -m kaocha.runner
 ### Build Uberjar
 
 ```bash
-clojure -T:build uber
+clojure -X:build uber
 ```
 
 ### Run Production Build
