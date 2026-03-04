@@ -32,7 +32,7 @@
  {:dev  {:extra-paths ["dev"]
          :extra-deps  {integrant/repl {:mvn/version "0.5.0"}}}
 
-  :test {:extra-paths ["test"]
+  :test {:extra-paths ["test/clj"]
          :extra-deps  {lambdaisland/kaocha {:mvn/version "1.91.1392"}
                        ring/ring-mock      {:mvn/version "0.6.2"}}}
 
