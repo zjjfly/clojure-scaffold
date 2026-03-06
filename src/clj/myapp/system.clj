@@ -44,7 +44,6 @@
   "Build Integrant config map from application config."
   []
   (let [cfg (config/config)]
-    (config/validate! cfg)
     {:myapp/datasource (get cfg :db)
 
      :myapp/migrations {:datasource (ig/ref :myapp/datasource)}

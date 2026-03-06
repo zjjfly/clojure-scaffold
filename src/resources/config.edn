@@ -1,12 +1,10 @@
-{:db     {:jdbc-url             #or [#env DATABASE_URL
-                                     "jdbc:postgresql://localhost:5432/postgres"]
-          :username             #or [#env DB_USER "postgres"]
-          :password             #or [#env DB_PASSWORD "postgres"]
+{:db     {:jdbc-url             #required-env DATABASE_URL
+          :username             #required-env DB_USER
+          :password             #required-env DB_PASSWORD
           :maximum-pool-size    10}
 
  :server {:port  #or [#env PORT 3000]
           :join? false}
 
- :jwt    {:secret   #or [#env JWT_SECRET
-                         "dev-secret-change-in-production"]
+ :jwt    {:secret   #required-env JWT_SECRET
           :exp-secs 86400}}

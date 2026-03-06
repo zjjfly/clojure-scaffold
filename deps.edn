@@ -10,6 +10,7 @@
         ;; System
         integrant/integrant               {:mvn/version "1.0.1"}
         aero/aero                         {:mvn/version "1.1.6"}
+        com.lambdaisland/dotenv           {:mvn/version "0.2.5"}
 
         ;; Auth
         buddy/buddy-sign                  {:mvn/version "3.6.1-359"}
@@ -24,8 +25,7 @@
 
         ;; Logging
         com.taoensso/timbre              {:mvn/version "6.8.0"}
-        org.slf4j/slf4j-simple           {:mvn/version "2.0.17"}
-        }
+        org.slf4j/slf4j-simple           {:mvn/version "2.0.17"}}
 
  :aliases
  {:dev  {:extra-paths ["dev"]
@@ -38,7 +38,6 @@
   :build {:extra-paths ["build"]
           :extra-deps  {io.github.clojure/tools.build {:git/tag "v0.10.12"
                                                        :git/sha "97c556"}
-                        org.babashka/cli              {:mvn/version "0.8.67"}
-                        }
+                        org.babashka/cli              {:mvn/version "0.8.67"}}
           :main-opts   ["-m" "core"]
           :ns-default  core}}}
