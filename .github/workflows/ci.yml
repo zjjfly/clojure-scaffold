@@ -61,3 +61,30 @@ jobs:
         with:
           name: myapp-jar
           path: target/myapp-0.1.0-standalone.jar
+
+  lint:
+    name: Lint (clj-kondo)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Clojure CLI
+        uses: DeLaGuardo/setup-clojure@13
+        with:
+          cli: latest
+          clj-kondo: latest
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key:  ${{ runner.os }}-maven-${{ hashFiles('deps.edn') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Download dependencies (for clj-kondo classpath analysis)
+        run: clojure -P
+
+      - name: Run clj-kondo
+        run: clj-kondo --lint src/clj test/clj --fail-level warning
