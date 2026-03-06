@@ -13,6 +13,15 @@
                                       :maximum-pool-size 10}
                              :server {:port 3000 :join? false}}))))
 
+  (testing "nil secret 应抛出异常"
+    (is (thrown?
+          clojure.lang.ExceptionInfo
+          (config/validate! {:jwt    {:secret nil}
+                             :db     {:jdbc-url "jdbc:postgresql://localhost/db"
+                                      :username "u" :password "p"
+                                      :maximum-pool-size 10}
+                             :server {:port 3000 :join? false}}))))
+
   (testing "合法 config 不抛出异常"
     (is (nil? (config/validate! {:jwt    {:secret "real-production-secret"}
                                  :db     {:jdbc-url "jdbc:postgresql://localhost/db"
