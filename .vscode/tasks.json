@@ -1,89 +1,39 @@
 {
 	"version": "2.0.0",
+	"inputs": [
+		{
+			"id": "cljAlias",
+			"type": "promptString",
+			"description": "Clojure alias (for example: test)",
+		},
+		{
+			"id": "mainClass",
+			"type": "promptString",
+			"description": "Main class (for example: com.github.zjjfly.myapp.core)",
+		}
+	],
 	"tasks": [
 		{
-			"type": "babashka",
-			"task": "prep",
+			"label": "clojure: uber with inputs",
+			"type": "shell",
+			"command": "zsh",
+			"args": [
+				"-c",
+				"alias_arg=\"${input:cljAlias}\"; main_arg=\"${input:mainClass}\"; if [ -n \"$alias_arg\" ] && [ -n \"$main_arg\" ]; then bb uber :aliases \"$alias_arg\" :main \"$main_arg\"; elif [ -n \"$alias_arg\" ]; then bb uber :aliases \"$alias_arg\"; elif [ -n \"$main_arg\" ]; then bb uber :main \"$main_arg\"; else bb uber; fi",
+				"--",
+				"${input:cljAlias}",
+				"${input:mainClass}"
+			],
 			"problemMatcher": [],
-			"label": "babashka: prep",
-			"detail": "Write pom.xml and copy resources"
-		},
-		{
-			"type": "babashka",
-			"task": "clean",
-			"problemMatcher": [],
-			"label": "babashka: clean",
-			"detail": "Delete the build target directory"
-		},
-		{
-			"type": "babashka",
-			"task": "compile",
-			"problemMatcher": [],
-			"label": "babashka: compile",
-			"detail": "Compile all sources (Java + Clojure)"
-		},
-		{
-			"type": "babashka",
-			"task": "compile:clj",
-			"problemMatcher": [],
-			"label": "babashka: compile:clj",
-			"detail": "Compile Clojure sources"
-		},
-		{
-			"type": "babashka",
-			"task": "compile:java",
-			"problemMatcher": [],
-			"label": "babashka: compile:java",
-			"detail": "Compile Java sources"
-		},
-		{
-			"type": "babashka",
-			"task": "install",
-			"problemMatcher": [],
-			"label": "babashka: install",
-			"detail": "Install jar into local Maven repository"
-		},
-		{
-			"type": "babashka",
-			"task": "jar",
-			"problemMatcher": [],
-			"label": "babashka: jar",
-			"detail": "Build jar"
-		},
-		{
-			"type": "babashka",
-			"task": "uber",
-			"problemMatcher": [],
-			"label": "babashka: uber",
-			"detail": "Build uberjar"
-		},
-		{
-			"type": "babashka",
-			"task": "test",
-			"problemMatcher": [],
-			"label": "babashka: test",
-			"detail": "Run all tests"
-		},
-		{
-			"type": "babashka",
-			"task": "test:fast",
-			"problemMatcher": [],
-			"label": "babashka: test:fast",
-			"detail": "Run tests, stop on first failure"
-		},
-		{
-			"type": "babashka",
-			"task": "test:unit",
-			"problemMatcher": [],
-			"label": "babashka: test:unit",
-			"detail": "Run only the :unit test suite"
-		},
-		{
-			"type": "babashka",
-			"task": "test:watch",
-			"problemMatcher": [],
-			"label": "babashka: test:watch",
-			"detail": "Run tests in watch mode (re-run on file changes)"
+			"detail": "Build uberjar",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared",
+				"clear": true
+			}
 		}
 	]
 }
