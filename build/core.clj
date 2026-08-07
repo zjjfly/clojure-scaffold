@@ -11,7 +11,7 @@
 (defn replace-hyphen [^String x]
   (str/replace x "-" "_"))
 
-(def lib 'myapp/myapp)
+(def lib 'com.github.zjjfly/myapp)
 (def group-id (namespace lib))
 (def artifact-id (name lib))
 (def root-package (replace-hyphen artifact-id))

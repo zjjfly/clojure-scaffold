@@ -7,20 +7,24 @@ A full-featured Clojure web application scaffold with modern web development ess
 ## Tech Stack
 
 ### Core Framework
+
 - **Clojure 1.12.4** - Programming language
 - **Ring** - HTTP server abstraction
 - **Reitit** - Routing library
 - **Integrant** - System component management
 
 ### Data Processing
+
 - **Muuntaja** - Content negotiation and format conversion
 - **Malli** - Data validation and schema definition
 
 ### Authentication & Authorization
+
 - **Buddy Sign** - JWT signing and verification
 - **Buddy Hashers** - Password hashing
 
 ### Database
+
 - **next.jdbc** - JDBC database access
 - **HikariCP** - Connection pooling
 - **HoneySQL** - SQL query builder
@@ -28,9 +32,11 @@ A full-featured Clojure web application scaffold with modern web development ess
 - **PostgreSQL** - Database driver
 
 ### Logging
+
 - **Timbre** - Logging framework
 
 ### Development Tools
+
 - **Integrant REPL** - REPL-driven development
 - **Kaocha** - Testing framework
 - **Ring Mock** - HTTP request mocking
@@ -77,12 +83,14 @@ clojure -P
 ### Configure Database
 
 1. Create databases:
+
 ```bash
 createdb myapp_dev
 createdb myapp_test
 ```
 
 2. Configure environment variables (optional, create `.env` file):
+
 ```bash
 DATABASE_URL=jdbc:postgresql://localhost:5432/myapp_dev
 ```
@@ -100,6 +108,7 @@ clojure -M:dev
 ```
 
 Then in the REPL:
+
 ```clojure
 (go)      ; Start system
 (reset)   ; Restart system
@@ -127,21 +136,25 @@ java -jar target/myapp-standalone.jar
 ## Features
 
 ### ✅ User Authentication
+
 - JWT token authentication
 - Encrypted password storage
 - Login/registration endpoints
 
 ### ✅ Database Integration
+
 - PostgreSQL connection pooling
 - Database migration management
 - HoneySQL query builder
 
 ### ✅ RESTful API
+
 - Reitit routing
 - Request/response formatting
 - Data validation
 
 ### ✅ Developer Experience
+
 - REPL-driven development
 - Hot reloading
 - Comprehensive test suite
@@ -149,10 +162,12 @@ java -jar target/myapp-standalone.jar
 ## API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/register` - User registration
 - `POST /api/auth/login` - User login
 
 ### Users
+
 - `GET /api/users` - Get user list (authentication required)
 - `GET /api/users/:id` - Get user details (authentication required)
 
@@ -174,6 +189,7 @@ java -jar target/myapp-standalone.jar
 ### Database Migrations
 
 Create new migration files:
+
 ```bash
 # Create in src/resources/migrations/ directory
 # Format: YYYYMMDDHHMMSS-description.up.sql
@@ -204,6 +220,7 @@ clojure -M:test --watch
 If you have [Babashka](https://babashka.org/) installed, you can use the `bb` command to quickly execute common tasks:
 
 ### Test Tasks
+
 ```bash
 bb test              # Run all tests
 bb test:unit         # Run only the :unit test suite
@@ -212,6 +229,7 @@ bb test:fast         # Run tests, stop on first failure
 ```
 
 ### Build Tasks
+
 ```bash
 bb clean             # Delete the build target directory
 bb prep              # Write pom.xml and copy resources
@@ -225,6 +243,7 @@ bb install           # Install jar into local Maven repository
 ```
 
 ### List All Available Tasks
+
 ```bash
 bb tasks             # List all available tasks with descriptions
 ```

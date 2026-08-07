@@ -7,20 +7,24 @@
 ## 技术栈
 
 ### 核心框架
+
 - **Clojure 1.12.4** - 编程语言
 - **Ring** - HTTP 服务器抽象
 - **Reitit** - 路由库
 - **Integrant** - 系统组件管理
 
 ### 数据处理
+
 - **Muuntaja** - 内容协商和格式转换
 - **Malli** - 数据验证和 Schema 定义
 
 ### 认证授权
+
 - **Buddy Sign** - JWT 签名和验证
 - **Buddy Hashers** - 密码哈希
 
 ### 数据库
+
 - **next.jdbc** - JDBC 数据库访问
 - **HikariCP** - 连接池
 - **HoneySQL** - SQL 查询构建器
@@ -28,16 +32,18 @@
 - **PostgreSQL** - 数据库驱动
 
 ### 日志
+
 - **Timbre** - 日志框架
 
 ### 开发工具
+
 - **Integrant REPL** - REPL 驱动开发
 - **Kaocha** - 测试框架
 - **Ring Mock** - HTTP 请求模拟
 
 ## 项目结构
 
-```
+```plain
 clojure-scaffold/
 ├── src/
 │   ├── clj/myapp/          # 应用源代码
@@ -77,12 +83,14 @@ clojure -P
 ### 配置数据库
 
 1. 创建数据库：
+
 ```bash
 createdb myapp_dev
 createdb myapp_test
 ```
 
 2. 配置环境变量（可选，创建 `.env` 文件）：
+
 ```bash
 DATABASE_URL=jdbc:postgresql://localhost:5432/myapp_dev
 ```
@@ -100,6 +108,7 @@ clojure -M:dev
 ```
 
 然后在 REPL 中：
+
 ```clojure
 (go)      ; 启动系统
 (reset)   ; 重启系统
@@ -127,21 +136,25 @@ java -jar target/myapp-standalone.jar
 ## 功能特性
 
 ### ✅ 用户认证
+
 - JWT Token 认证
 - 密码加密存储
 - 登录/注册接口
 
 ### ✅ 数据库集成
+
 - PostgreSQL 连接池
 - 数据库迁移管理
 - HoneySQL 查询构建
 
 ### ✅ RESTful API
+
 - Reitit 路由
 - 请求/响应格式化
 - 数据验证
 
 ### ✅ 开发体验
+
 - REPL 驱动开发
 - 热重载
 - 完整的测试套件
@@ -149,10 +162,12 @@ java -jar target/myapp-standalone.jar
 ## API 端点
 
 ### 认证
+
 - `POST /api/auth/register` - 用户注册
 - `POST /api/auth/login` - 用户登录
 
 ### 用户
+
 - `GET /api/users` - 获取用户列表（需要认证）
 - `GET /api/users/:id` - 获取用户详情（需要认证）
 
@@ -174,6 +189,7 @@ java -jar target/myapp-standalone.jar
 ### 数据库迁移
 
 创建新的迁移文件：
+
 ```bash
 # 在 src/resources/migrations/ 目录下创建
 # 格式：YYYYMMDDHHMMSS-description.up.sql
@@ -204,6 +220,7 @@ clojure -M:test --watch
 如果安装了 [Babashka](https://babashka.org/)，可以使用 `bb` 命令快速执行常用任务：
 
 ### 测试任务
+
 ```bash
 bb test              # 运行所有测试
 bb test:unit         # 只运行 :unit 测试套件
@@ -212,6 +229,7 @@ bb test:fast         # 运行测试，遇到第一个失败就停止
 ```
 
 ### 构建任务
+
 ```bash
 bb clean             # 删除构建目标目录
 bb prep              # 生成 pom.xml 并复制资源文件
@@ -225,6 +243,7 @@ bb install           # 安装 jar 到本地 Maven 仓库
 ```
 
 ### 查看所有可用任务
+
 ```bash
 bb tasks             # 列出所有可用的任务及其说明
 ```
