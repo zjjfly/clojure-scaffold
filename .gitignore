@@ -9,7 +9,6 @@
 .nrepl-port
 *.log
 /.idea/
-/.vscode/
 /.claude/
 /.portal/
 /.calva/

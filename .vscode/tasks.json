@@ -1,0 +1,89 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "babashka",
+			"task": "prep",
+			"problemMatcher": [],
+			"label": "babashka: prep",
+			"detail": "Write pom.xml and copy resources"
+		},
+		{
+			"type": "babashka",
+			"task": "clean",
+			"problemMatcher": [],
+			"label": "babashka: clean",
+			"detail": "Delete the build target directory"
+		},
+		{
+			"type": "babashka",
+			"task": "compile",
+			"problemMatcher": [],
+			"label": "babashka: compile",
+			"detail": "Compile all sources (Java + Clojure)"
+		},
+		{
+			"type": "babashka",
+			"task": "compile:clj",
+			"problemMatcher": [],
+			"label": "babashka: compile:clj",
+			"detail": "Compile Clojure sources"
+		},
+		{
+			"type": "babashka",
+			"task": "compile:java",
+			"problemMatcher": [],
+			"label": "babashka: compile:java",
+			"detail": "Compile Java sources"
+		},
+		{
+			"type": "babashka",
+			"task": "install",
+			"problemMatcher": [],
+			"label": "babashka: install",
+			"detail": "Install jar into local Maven repository"
+		},
+		{
+			"type": "babashka",
+			"task": "jar",
+			"problemMatcher": [],
+			"label": "babashka: jar",
+			"detail": "Build jar"
+		},
+		{
+			"type": "babashka",
+			"task": "uber",
+			"problemMatcher": [],
+			"label": "babashka: uber",
+			"detail": "Build uberjar"
+		},
+		{
+			"type": "babashka",
+			"task": "test",
+			"problemMatcher": [],
+			"label": "babashka: test",
+			"detail": "Run all tests"
+		},
+		{
+			"type": "babashka",
+			"task": "test:fast",
+			"problemMatcher": [],
+			"label": "babashka: test:fast",
+			"detail": "Run tests, stop on first failure"
+		},
+		{
+			"type": "babashka",
+			"task": "test:unit",
+			"problemMatcher": [],
+			"label": "babashka: test:unit",
+			"detail": "Run only the :unit test suite"
+		},
+		{
+			"type": "babashka",
+			"task": "test:watch",
+			"problemMatcher": [],
+			"label": "babashka: test:watch",
+			"detail": "Run tests in watch mode (re-run on file changes)"
+		}
+	]
+}
